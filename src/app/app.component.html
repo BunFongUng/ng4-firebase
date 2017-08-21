@@ -1,3 +1,13 @@
-<h1>
-  {{title}}
-</h1>
+<div class="row columns">
+  <button (click)="login()" *ngIf="!(user | async)?.uid">Anonymous Login</button>
+  <button (click)="logout()" *ngIf="(user | async)?.uid">Lgout</button>
+
+  <input type="text" name="message" id="message" *ngIf="(user | async)?.uid" placeholder="Enter your message" (keyup.enter)="send($event.target.value)" [(ngModel)]="msgVal">
+
+  <div id="details-container">
+    <p *ngFor="let item of items | async">
+      <img src="assets/images/pin.jpg" alt="">
+      {{ item.message }}
+    </p>
+  </div>
+</div>
